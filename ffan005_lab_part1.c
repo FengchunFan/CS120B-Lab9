@@ -10,18 +10,20 @@
  */
 void Tick() {
         switch(state) {
-                case Start:     state = Init; break;
+                case Start:     
+			state = Init; break;
 
-                case Init:      if ((~PINA & 0x07) == 0x01) {
-				state = PlayC;
-				}else if ((~PINA & 0x07) == 0x02) {
-				state = PlayD;}
-                                else if ((~PINA & 0x07) == 0x04) {
-				state = PlayE;}
-                                else {
-				state = Init;
-				}
-                                break;
+                case Init:      
+			if ((~PINA & 0x07) == 0x01) {
+			state = PlayC;
+			}else if ((~PINA & 0x07) == 0x02) {
+			state = PlayD;
+			}else if ((~PINA & 0x07) == 0x04) {
+			state = PlayE;
+			} else {
+			state = Init;
+			}
+                        break;
 
                 case PlayC:     if ((~PINA & 0x07) == 0x01) {
 				state = PlayC;
