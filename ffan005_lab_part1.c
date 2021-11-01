@@ -34,86 +34,86 @@ void PWM_on() {
   set_PWM(0);
 }
 
-void PWM_off() {
-  TCCR3A = 0x00;
-  TCCR3B = 0x00;
-}
+void Tick() {
+        switch(state) {
+                case Start:     
+                state = Init; 
+                break;
 
-void Tick(){
-        unsigned char check = (~PINA & 0x07);
-        switch(state){
-                case Start:
-                        state = Init;
-                        break;
-                case Init:
-                        if(check == 0x01){
-                        state = PlayC;
-                        }else if (check == 0x02){
-                        state = PlayD;
-                        }else if (check == 0x04){
-                        state = PlayE;
-                        } else {
-                        state = Init;
-                        }
-                        break;
+                case Init:      
+                if ((~PINA & 0x07) == 0x01) {
+				        state = PlayC;
+				        }else if ((~PINA & 0x07) == 0x02) {
+				        state = PlayD;
+                } else if ((~PINA & 0x07) == 0x04) {
+				        state = PlayE;
+                } else {
+				        state = Init;
+				        }
+                break;
 
-                case PlayC:
-                        if(check == 0x01){
-                        state = PlayC;
-                        }else {
-                        state = Init;
-                        }
+                case PlayC:     
+                if ((~PINA & 0x07) == 0x01) {
+				        state = PlayC;
+				        } else {
+				        state = Init;
+				        }
+                break;
 
                 case PlayD:
-                        if(check == 0x02){
-                        state = PlayD;
-                        }else {
-                        state = Init;
-                        }
+                if ((~PINA & 0x07) == 0x02) {
+				        state = PlayD;
+				        } else {
+				        state = Init;
+				        }
+                break;
 
-                case PlayE:
-                        if(check == 0x04){
-                        state = PlayE;
-                        }else {
-                        state = Init;
-                        }
+                case PlayE:     
+                if ((~PINA & 0x07) == 0x04) {
+				        state = PlayE;
+				        }else {
+				        state = Init;
+				        }
+                break;
 
-                default:
-                        state = Start;
-                        break;
+                default:        
+                state = Start; 
+                break;
         }
 
-        switch(state){
-                case Start:
-                        break;
-                case Init:
-                        set_PWM(0);
-                        break;
-                case PlayC:
-                        set_PWM(261.63);
-                        break;
-
-                case PlayD:
-                        set_PWM(293.66);
-                        break;
-
-                case PlayE:
-                        set_PWM(329.63);
-                        break;
-
-                default:
-                        break;
+        switch (state) {
+                case Start:     
+			          break;
+                
+                case Init:      
+			          set_PWM(0); 
+			          break;
+                
+                case PlayC:     
+		           	set_PWM(261.63); 
+			          break;
+                
+                case PlayD:     
+                set_PWM(293.66); 
+		           	break;
+               
+                case PlayE:     
+			          set_PWM(329.63); 
+		          	break;
+            
+                default:        
+		          	break;
         }
 }
 
-int main(void){
-        DDRA = 0x00; PORTA = 0xFF;
-        DDRB = 0xFF; PORTB = 0x00;
-
-        PWM_on();
-        while(1){
-                Tick();
-        }
+int main(void) {
+    DDRA = 0x00; PORTA = 0xFF;
+    DDRB = 0xFF; PORTB = 0x00;
+    PWM_on();
+    while (1) {
+        Tick();
+    }
+return 0;
 }
 
 
