@@ -113,7 +113,7 @@ void Tick(){
                         if(power == 0x00){
                                 power = 0x01;
                                 set_PWM(FRE[i]); //messed up thought it was reset
-                        }else{
+                        }else if (power == 0x01) { 
                                 power = 0x00;
                                 set_PWM(0);
                         }
