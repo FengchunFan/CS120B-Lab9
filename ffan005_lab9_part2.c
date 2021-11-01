@@ -33,6 +33,6 @@ void PWM_on() {
 }
 
 void PWM_off() {
-        TCCR3A = 0x00;
-        TCCR3B = 0x00;
+  TCCR3A = 0x00;
+  TCCR3B = 0x00;
 }
