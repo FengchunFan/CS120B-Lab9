@@ -6,7 +6,7 @@
  *
  *      I acknowledge all content contained herein, excluding template or example
  *      code, is my own original work.
- *      Demo: 
+ *      Demo: https://www.youtube.com/watch?v=aDZkdwt6FXw
  */
 #include <avr/io.h>
 #ifdef _SIMULATE_
@@ -40,7 +40,7 @@ void PWM_off() {
   TCCR3B = 0x00;
 }
 
-double FRE[8] = {261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25};
+double FRE[8] = {261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25}; //store all the frequencies in a array
 unsigned char i = 0x00;
 
 void Tick(){
