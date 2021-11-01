@@ -6,7 +6,7 @@
  *
  *      I acknowledge all content contained herein, excluding template or example
  *      code, is my own original work.
- *      Demo:
+ *      Demo: https://www.youtube.com/shorts/2Hvsmo7wBw8
  */
 #include <avr/io.h>
 #ifdef _SIMULATE_
@@ -107,7 +107,7 @@ void Tick() {
 		break;
 			
                 default:        
-			break;
+		break;
         }
 }
 
